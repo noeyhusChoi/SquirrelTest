@@ -27,10 +27,10 @@ jobs:
 
       - name: Squirrel.Windows 실행파일 다운로드
         run: |
-          Invoke-WebRequest -Uri "https://github.com/Squirrel/Squirrel.Windows/releases/download/1.9.1/Squirrel.Windows.1.9.1.zip" -OutFile squirrel.windows.zip
-          Expand-Archive squirrel.windows.zip -DestinationPath .\squirrel
+            Invoke-WebRequest -Uri "https://github.com/Squirrel/Squirrel.Windows/releases/download/1.9.1/Squirrel.Windows-1.9.1.zip" -OutFile squirrel.windows.zip
+            Expand-Archive squirrel.windows.zip -DestinationPath .\squirrel
         shell: pwsh
-
+      
       - name: nuspec 파일 버전 치환
         shell: pwsh
         run: |
