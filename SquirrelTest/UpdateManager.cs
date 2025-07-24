@@ -21,7 +21,7 @@ public class Update
         using (var client = new HttpClient())
         {
             client.DefaultRequestHeaders.Add("User-Agent", "Updater"); // 필수!
-            client.DefaultRequestHeaders.Add("Authorization", "token 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");
+            //client.DefaultRequestHeaders.Add("Authorization", "token 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");
 
             try
             {
