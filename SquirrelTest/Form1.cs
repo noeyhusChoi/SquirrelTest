@@ -12,6 +12,8 @@ namespace SquirrelTest
             InitializeComponent();
             // Load 이벤트 핸들러 등록
             this.Load += Form1_Load;
+
+            //TEST
         }
 
         private async void Form1_Load(object sender, EventArgs e)
