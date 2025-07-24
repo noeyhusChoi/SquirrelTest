@@ -1,0 +1,9 @@
+﻿[24-07-25 11:30:43] info: Program: Starting Squirrel Updater: --releasify SquirrelTest.1.0.0.nupkg
+[24-07-25 11:30:43] info: Program: Bootstrapper EXE found at:C:\Users\niaci\source\repos\SquirrelTest\packages\squirrel.windows.2.0.1\tools\Setup.exe
+[24-07-25 11:30:43] info: Program: Creating release package: C:\Users\niaci\source\repos\SquirrelTest\SquirrelTest\bin\Release\Releases\SquirrelTest.1.0.0.nupkg
+[24-07-25 11:30:43] info: ReleasePackage: Creating release package: C:\Users\niaci\source\repos\SquirrelTest\SquirrelTest\bin\Release\Releases\SquirrelTest.1.0.0.nupkg => C:\Users\niaci\source\repos\SquirrelTest\SquirrelTest\bin\Release\Releases\SquirrelTest-1.0.0-full.nupkg
+[24-07-25 11:30:43] info: ReleasePackage: Extracting dependent packages: []
+[24-07-25 11:30:43] info: ReleasePackage: Removing unnecessary data
+[24-07-25 11:30:43] info: ReleasePackage: No release notes found in C:\Users\niaci\AppData\Local\SquirrelTemp\tempa\SquirrelTest.nuspec
+[24-07-25 11:30:45] info: Program: Building embedded zip file for Setup.exe
+[24-07-25 11:30:50] info: Program: Finished Squirrel Updater
