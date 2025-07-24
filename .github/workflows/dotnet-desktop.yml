@@ -45,10 +45,18 @@ jobs:
         run: |
           ./nuget.exe pack SquirrelTest.generated.nuspec
 
-      - name: Squirrel 패키징 (Setup.exe, RELEASES 등 생성)
+      - name: nupkg 파일명 변수 설정
+        id: set_nupkg
+        shell: pwsh
         run: |
-          .\squirrel\Squirrel.exe --releasify SquirrelTest.*.nupkg
-      
+            $nupkg = Get-ChildItem -Name *.nupkg | Select-Object -First 1
+            echo "nupkg_name=$nupkg" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+        
+      - name: Squirrel 패키징
+        shell: cmd
+        run: |
+            .\squirrel\Squirrel.exe --releasify ${{ steps.set_nupkg.outputs.nupkg_name }} --releaseDir out
+
       - name: Squirrel 로그
         run: |      
           type .\squirrel\SquirrelSetup.log
