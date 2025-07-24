@@ -55,23 +55,19 @@ jobs:
       - name: Squirrel 패키징
         shell: cmd
         run: |
-            .\squirrel\Squirrel.exe --releasify ${{ steps.set_nupkg.outputs.nupkg_name }}
+            .\squirrel\Squirrel.exe --releasify ${{ steps.set_nupkg.outputs.nupkg_name }} --releaseDir out
 
       - name: Squirrel 로그
         run: |      
           type .\squirrel\SquirrelSetup.log
-        shell: cmd
-        
-      - name: 디렉토리 목록 확인 (디버깅용)
-        run: dir /s /b
         shell: cmd
 
       - name: Release 업로드
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            Setup.exe
-            RELEASES
-            SquirrelTest-*-full.nupkg
+            out\Setup.exe
+            out\RELEASES
+            out\SquirrelTest-*-full.nupkg
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
