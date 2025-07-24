@@ -13,7 +13,7 @@ namespace SquirrelTest
             // Load 이벤트 핸들러 등록
             this.Load += Form1_Load;
 
-            //TEST
+            //TEST1
         }
 
         private async void Form1_Load(object sender, EventArgs e)

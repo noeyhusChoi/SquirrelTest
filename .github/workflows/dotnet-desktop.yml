@@ -21,7 +21,9 @@ jobs:
         run: nuget.exe restore SquirrelTest.sln
 
       - name: Release 빌드
-        run: msbuild SquirrelTest.sln /p:Configuration=Release
+        run: |
+          "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" SquirrelTest.sln /p:Configuration=Release
+
 
       - name: Squirrel.Windows 다운로드
         run: |
