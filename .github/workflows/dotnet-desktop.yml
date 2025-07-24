@@ -55,7 +55,7 @@ jobs:
       - name: Squirrel 패키징
         shell: cmd
         run: |
-            .\squirrel\Squirrel.exe --releasify ${{ steps.set_nupkg.outputs.nupkg_name }} --releaseDir out
+            .\squirrel\Squirrel.exe --releasify ${{ steps.set_nupkg.outputs.nupkg_name }}
 
       - name: Squirrel 로그
         run: |      
