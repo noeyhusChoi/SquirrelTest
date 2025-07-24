@@ -28,9 +28,6 @@ public class Update
                 var json = await client.GetStringAsync(apiUrl);
                 var obj = JObject.Parse(json);
 
-                Console.WriteLine(json);
-                Console.WriteLine("성공");
-
                 return (string)obj["tag_name"];
             }
             catch (HttpRequestException ex)
@@ -75,5 +72,4 @@ public class Update
             Console.WriteLine("업데이트 오류: " + ex.Message);
         }
     }
-
 }
