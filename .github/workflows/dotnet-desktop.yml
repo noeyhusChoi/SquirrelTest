@@ -48,7 +48,9 @@ jobs:
       - name: Squirrel 패키징 (Setup.exe, RELEASES 등 생성)
         run: |
           .\squirrel\Squirrel.exe --releasify SquirrelTest.*.nupkg --releaseDir out
-
+          type .\squirrel\SquirrelSetup.log
+        shell: cmd
+        
       - name: 디렉토리 목록 확인 (디버깅용)
         run: dir /s /b
         shell: cmd
