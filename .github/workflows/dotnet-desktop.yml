@@ -49,6 +49,10 @@ jobs:
         run: |
           .\squirrel\Squirrel.exe --releasify SquirrelTest.*.nupkg
 
+      - name: 디렉토리 목록 확인 (디버깅용)
+        run: dir /s /b
+        shell: cmd
+
       - name: Release 업로드
         uses: softprops/action-gh-release@v2
         with:
