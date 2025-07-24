@@ -19,7 +19,7 @@ jobs:
 
       - name: NuGet Restore
         run: nuget.exe restore SquirrelTest.sln
-- 
+
       - name: Release 빌드
         shell: cmd
         run: |
