@@ -34,8 +34,8 @@ jobs:
       - name: nuspec 파일 버전 치환
         shell: pwsh
         run: |
-          $version = "${{ github.ref_name }}"
-          (Get-Content SquirrelTest.nuspec) -replace '\$version\$', $version | Set-Content SquirrelTest.generated.nuspec -Encoding UTF8
+            $version = "${{ github.ref_name }}"
+            (Get-Content SquirrelTest.nuspec) -replace '\$version\$', $version | Out-File SquirrelTest.generated.nuspec -Encoding ascii
 
       - name: NuGet 패키지(nupkg) 생성
         run: |
