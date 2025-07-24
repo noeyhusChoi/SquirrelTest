@@ -27,7 +27,7 @@ jobs:
 
       - name: Squirrel.Windows 실행파일 다운로드
         run: |
-          Invoke-WebRequest -Uri "https://github.com/Squirrel/Squirrel.Windows/releases/download/2.0.1/Squirrel.Windows.2.0.1.zip" -OutFile squirrel.windows.zip
+          Invoke-WebRequest -Uri "https://github.com/Squirrel/Squirrel.Windows/releases/download/1.9.1/Squirrel.Windows.1.9.1.zip" -OutFile squirrel.windows.zip
           Expand-Archive squirrel.windows.zip -DestinationPath .\squirrel
         shell: pwsh
 
