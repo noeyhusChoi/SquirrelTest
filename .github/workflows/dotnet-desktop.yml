@@ -31,13 +31,23 @@ jobs:
             Expand-Archive squirrel.windows.zip -DestinationPath .\squirrel
         shell: pwsh
       
+      - name: AssemblyInfo.cs 버전 치환
+        shell: pwsh
+        run: |
+          $ref = "${{ github.ref_name }}"
+          $version = $ref -replace "^v", ""
+          (Get-Content SquirrelTest/Properties/AssemblyInfo.cs -Raw) `
+            -replace 'Assembly(File)?Version\("\d+(\.\d+)*"\)', "AssemblyVersion(`"$version`")" `
+            -replace 'AssemblyFileVersion\("\d+(\.\d+)*"\)', "AssemblyFileVersion(`"$version`")" `
+            | Set-Content SquirrelTest/Properties/AssemblyInfo.cs -Encoding UTF8
+
       - name: nuspec 파일 버전 치환
         shell: pwsh
         run: |
-            $ref = "${{ github.ref_name }}"
-            $version = $ref -replace "^v", ""
-            (Get-Content SquirrelTest.nuspec -Raw) -replace '\$version\$', $version | Out-File SquirrelTest.generated.nuspec -Encoding ascii
-        
+          $ref = "${{ github.ref_name }}"
+          $version = $ref -replace "^v", ""
+          (Get-Content SquirrelTest.nuspec -Raw) -replace '\$version\$', $version | Out-File SquirrelTest.generated.nuspec -Encoding ascii        
+      
       - name: SquirrelTest.generated.nuspec 내용 확인 (디버깅)
         run: type SquirrelTest.generated.nuspec
       
