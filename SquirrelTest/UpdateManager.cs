@@ -66,6 +66,8 @@ public class Update
                 {
                     // 이미 최신
                     Console.WriteLine("최신 버전입니다.");
+                    Console.WriteLine(GetCurrentFileVersion());
+                    Console.WriteLine(GetCurrentVersion());
                 }
             }
         }
@@ -73,5 +75,18 @@ public class Update
         {
             Console.WriteLine("업데이트 오류: " + ex.Message);
         }
+    }
+
+    public string GetCurrentVersion()
+    {
+        var version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+        return version != null ? version.ToString() : "Unknown";
+    }
+
+    public string GetCurrentFileVersion()
+    {
+        var location = System.Reflection.Assembly.GetExecutingAssembly().Location;
+        var versionInfo = System.Diagnostics.FileVersionInfo.GetVersionInfo(location);
+        return versionInfo.FileVersion;
     }
 }
