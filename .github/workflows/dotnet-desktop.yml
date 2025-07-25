@@ -34,18 +34,26 @@ jobs:
         run: |
           $ref = "${{ github.ref_name }}"
           $version = $ref -replace "^v", ""
-          (Get-Content SquirrelTest/Properties/AssemblyInfo.cs -Raw) `
-            -replace 'Assembly(File)?Version\("\d+(\.\d+)*"\)', "AssemblyVersion(`"$version`")" `
-            -replace 'AssemblyFileVersion\("\d+(\.\d+)*"\)', "AssemblyFileVersion(`"$version`")" `
-            | Set-Content SquirrelTest/Properties/AssemblyInfo.cs -Encoding UTF8
-
+          $path = "SquirrelTest/Properties/AssemblyInfo.cs"
+          $text = Get-Content $path -Raw
+          # AssemblyVersion, AssemblyFileVersion 둘 다 일괄 치환
+          $text = $text -replace 'AssemblyVersion\(".*?"\)', "AssemblyVersion(`"$version`")"
+          $text = $text -replace 'AssemblyFileVersion\(".*?"\)', "AssemblyFileVersion(`"$version`")"
+          $text | Set-Content $path -Encoding UTF8
+          Write-Host "AssemblyInfo.cs after version update:"
+          Get-Content $path
+          
       - name: nuspec 파일 버전 치환
         shell: pwsh
         run: |
           $ref = "${{ github.ref_name }}"
           $version = $ref -replace "^v", ""
-          (Get-Content SquirrelTest.nuspec -Raw) -replace '\$version\$', $version | Out-File SquirrelTest.generated.nuspec -Encoding ascii        
-      
+          $nuspec = Get-Content SquirrelTest.nuspec -Raw
+          $nuspec = $nuspec -replace '\$version\$', $version
+          $nuspec | Out-File SquirrelTest.generated.nuspec -Encoding utf8
+          Write-Host "nuspec after version update:"
+          Get-Content SquirrelTest.generated.nuspec
+          
       - name: SquirrelTest.generated.nuspec 내용 확인 (디버깅)
         run: type SquirrelTest.generated.nuspec
       
