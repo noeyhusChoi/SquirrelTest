@@ -93,8 +93,8 @@ jobs:
             tag_name: ${{ steps.get_assembly_version.outputs.version }}
             name: Release ${{ steps.get_assembly_version.outputs.version }}
             files: |
-            out/Setup.exe
-            out/RELEASES
-            out/SquirrelTest-*-full.nupkg
+              out/Setup.exe
+              out/RELEASES
+              out/SquirrelTest-*-full.nupkg
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
