@@ -22,8 +22,10 @@ public class Update
         string apiUrl = "https://api.github.com/repos/noeyhusChoi/SquirrelTest/releases/latest";
         using (var client = new HttpClient())
         {
-            client.DefaultRequestHeaders.Add("User-Agent", "Updater"); // 필수!
-            //client.DefaultRequestHeaders.Add("Authorization", "token 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");
+            string token = Environment.GetEnvironmentVariable("GITHUB_TOKEN");
+            Console.WriteLine(token);
+            client.DefaultRequestHeaders.Add("User-Agent", "noeyhusChoi"); // 필수!
+            client.DefaultRequestHeaders.Add("Authorization", $"token {token}");
 
             try
             {
