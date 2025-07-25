@@ -90,7 +90,9 @@ jobs:
       - name: Release 업로드
         uses: softprops/action-gh-release@v2
         with:
-          files: |
+            tag_name: ${{ steps.get_assembly_version.outputs.version }}
+            name: Release ${{ steps.get_assembly_version.outputs.version }}
+            files: |
             out/Setup.exe
             out/RELEASES
             out/SquirrelTest-*-full.nupkg
