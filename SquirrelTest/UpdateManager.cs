@@ -6,6 +6,8 @@ using System.Windows.Forms;
 using Newtonsoft.Json.Linq;
 
 
+//TEST
+
 public class Update
 {
     // 이 클래스는 Squirrel을 사용하여 업데이트를 관리합니다.
