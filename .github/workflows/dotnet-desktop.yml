@@ -78,6 +78,15 @@ jobs:
           type .\squirrel\SquirrelSetup.log
         shell: cmd
 
+      - name: 태그 자동 생성 및 푸시
+        shell: pwsh
+        run: |
+            $version = "${{ steps.get_assembly_version.outputs.version }}"
+            git config user.name "github-actions"
+            git config user.email "github-actions@github.com"
+            git tag -f $version
+            git push origin $version --force
+
       - name: Release 업로드
         uses: softprops/action-gh-release@v2
         with:
