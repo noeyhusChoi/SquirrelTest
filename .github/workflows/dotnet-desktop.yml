@@ -29,30 +29,30 @@ jobs:
             Expand-Archive squirrel.windows.zip -DestinationPath .\squirrel
         shell: pwsh
       
-      - name: AssemblyInfo.cs 버전 치환
+      - name: Assembly 버전 추출
+        id: get_assembly_version
         shell: pwsh
         run: |
-          $ref = "${{ github.ref_name }}"
-          $version = $ref -replace "^v", ""
-          $path = "SquirrelTest/Properties/AssemblyInfo.cs"
-          $text = Get-Content $path -Raw
-          # AssemblyVersion, AssemblyFileVersion 둘 다 일괄 치환
-          $text = $text -replace 'AssemblyVersion\(".*?"\)', "AssemblyVersion(`"$version`")"
-          $text = $text -replace 'AssemblyFileVersion\(".*?"\)', "AssemblyFileVersion(`"$version`")"
-          $text | Set-Content $path -Encoding UTF8
-          Write-Host "AssemblyInfo.cs after version update:"
-          Get-Content $path
+            $path = "SquirrelTest/Properties/AssemblyInfo.cs"
+            $text = Get-Content $path -Raw
+            # AssemblyVersion("1.2.3.4") 또는 AssemblyFileVersion("1.2.3.4")에서 버전 추출
+            if ($text -match 'Assembly(File)?Version\("([\d\.]+)"\)') {
+            $version = $Matches[2]
+            echo "version=$version" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+            Write-Host "Assembly version: $version"
+            } else {
+            throw "Assembly version not found!"
+            }
           
       - name: nuspec 파일 버전 치환
         shell: pwsh
         run: |
-          $ref = "${{ github.ref_name }}"
-          $version = $ref -replace "^v", ""
-          $nuspec = Get-Content SquirrelTest.nuspec -Raw
-          $nuspec = $nuspec -replace '\$version\$', $version
-          $nuspec | Out-File SquirrelTest.generated.nuspec -Encoding utf8
-          Write-Host "nuspec after version update:"
-          Get-Content SquirrelTest.generated.nuspec
+            $version = "${{ steps.get_assembly_version.outputs.version }}"
+            $nuspec = Get-Content SquirrelTest.nuspec -Raw
+            $nuspec = $nuspec -replace '\$version\$', $version
+            $nuspec | Out-File SquirrelTest.generated.nuspec -Encoding utf8
+            Write-Host "nuspec after version update:"
+            Get-Content SquirrelTest.generated.nuspec
           
       - name: SquirrelTest.generated.nuspec 내용 확인 (디버깅)
         run: type SquirrelTest.generated.nuspec
